@@ -52,16 +52,27 @@ async function addToCart(page) {
 }
 
 async function fillBilling(page) {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  await page.type("input[id='checkout_email']", 'test1@gmail.com');
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  await page.waitForSelector("input[id='checkout_email']");
+
+  await page.type("input[id='checkout_email']", 'test154@gmail.com');
+  await page.waitForTimeout(100);
   await page.type("input[id='checkout_billing_address_first_name']", 'John');
+  await page.waitForTimeout(100);
   await page.type("input[id='checkout_billing_address_last_name']", 'Doe');
+  await page.waitForTimeout(100);
   await page.type(
     "input[id='checkout_billing_address_address1']",
     '30419 Double Dr'
   );
-  await page.type("select[id='checkout_billing_address_province']", 'Florida');
+  await page.waitForTimeout(100);
+  await page.type("input[id='checkout_billing_address_city']", 'Wesley Chapel');
+  await page.waitForTimeout(100);
+  await page.select("select[id='checkout_billing_address_province']", 'FL');
+  await page.waitForTimeout(100);
   await page.type("input[id='checkout_billing_address_zip']", '33544');
+  await page.waitForSelector('button[ id="continue_button"]');
+  await page.click('button[ id="continue_button"]');
 }
 
 async function checkout() {
